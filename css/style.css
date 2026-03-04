@@ -198,6 +198,18 @@ body {
   margin: 3.25rem auto 0;
 }
 
+#conferences {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto 5rem;
+}
+
+#conferences .archive-link {
+  display: block;
+  width: max-content;
+  margin: 3.25rem auto 0;
+}
+
 .project {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
