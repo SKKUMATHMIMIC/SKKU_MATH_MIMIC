@@ -103,8 +103,11 @@ body {
   font-weight: var(--weight-semibold);
 }
 
-.navbar .nav-link.is-active {
-  color: #1c6b42;
+.navbar .nav-link.is-active,
+.navbar .nav-link.is-active:visited,
+.navbar .nav-link.is-active:hover,
+.navbar .nav-link.is-active:focus {
+  color: #1c6b42 !important;
 }
 
 .navbar #logo img {
