@@ -174,7 +174,11 @@
             {% if page.abstract_tagline %}
             <p class="abstract-tagline">{{ page.abstract_tagline }}</p>
             {% endif %}
+            {% if page.abstract_body_ko %}
+            {{ page.abstract_body_ko | markdownify }}
+            {% else %}
             {{ content }}
+            {% endif %}
             {% if page.prerequisite %}
             <p class="seminar-prerequisite"><strong>사전지식:</strong> {{ page.prerequisite }}</p>
             {% endif %}

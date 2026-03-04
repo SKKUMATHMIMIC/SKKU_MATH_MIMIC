@@ -1,17 +1,23 @@
 ---
 layout: seminar_detail
 page_title: "MIMIC | SEMINAR TITLE"
+
+# Basic info
 seminar_title: "SEMINAR TITLE"
 semester_label: "2025 Fall"
 seminar_number: "02"
 speaker: "Speaker Name (Affiliation)"
 current_path: "2025fall/your-file-name.html"
+
+# Korean content
 abstract_tagline: "“한 줄 멘트”"
+abstract_body_ko: |
+  세미나 초록 첫 번째 문단.
+
+  세미나 초록 두 번째 문단.
 prerequisite: "없음"
-video_heading: "Video Link"
-video_note: "영상 링크가 준비되면 이 위치에 추가할 수 있습니다."
-thumbnail_src: "/assets/project/project-one.png"
-thumbnail_alt: "Seminar thumbnail"
+
+# English content
 seminar_title_en: "ENGLISH SEMINAR TITLE"
 semester_label_en: "2025 Fall"
 speaker_en: "Speaker Name (Affiliation)"
@@ -23,14 +29,13 @@ abstract_body_en: |
   English abstract second paragraph.
 prerequisite_en: "None"
 prerequisite_label_en: "Prerequisite"
+
+# Media
 video_heading_en: "Video Link"
 video_note_en: "The video link will be added here when available."
+video_heading: "Video Link"
+video_note: "영상 링크가 준비되면 이 위치에 추가할 수 있습니다."
+thumbnail_src: "/assets/project/project-one.png"
 thumbnail_alt_en: "Seminar thumbnail"
+thumbnail_alt: "Seminar thumbnail"
 ---
-
-<p>
-  세미나 초록 첫 번째 문단.
-</p>
-<p>
-  세미나 초록 두 번째 문단.
-</p>
