@@ -26,18 +26,112 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/utilities.css" />
     <style>
+      :root {
+        --sidebar-border: #dbd9e2;
+        --sidebar-text: #56525f;
+        --sidebar-accent: #6957f3;
+        --sidebar-hover: #f3f2f8;
+        --page-bg: #fbfbfd;
+      }
+
       body {
         min-height: 100vh;
+        background: var(--page-bg);
       }
 
       .navbar .nav-link.is-active {
-        color: #6957f3;
+        color: var(--sidebar-accent);
+      }
+
+      .seminar-layout {
+        display: grid;
+        grid-template-columns: minmax(220px, 310px) 1fr;
+        margin-top: 80px;
+        min-height: calc(100vh - 80px);
+      }
+
+      .seminar-sidebar {
+        border-right: 1px solid var(--sidebar-border);
+        background: #fbfbfd;
+      }
+
+      .seminar-sidebar-header {
+        padding: 1.5rem 1.5rem 1rem;
+        border-bottom: 1px solid var(--sidebar-border);
+      }
+
+      .seminar-sidebar-header h1 {
+        font-size: 1.05rem;
+        letter-spacing: 0.04em;
+      }
+
+      .season {
+        border-bottom: 1px solid var(--sidebar-border);
+      }
+
+      .season-toggle {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.25rem 1.5rem;
+        border: 0;
+        background: transparent;
+        font: inherit;
+        color: var(--sidebar-accent);
+        cursor: pointer;
+      }
+
+      .season-toggle span:first-child {
+        font-size: 0.82rem;
+        font-weight: 600;
+      }
+
+      .season-icon {
+        width: 2.3rem;
+        height: 2.3rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #c8c3d7;
+        border-radius: 999px;
+        background: linear-gradient(180deg, #ffffff 0%, #f3f1fb 100%);
+        box-shadow: 0 8px 20px rgba(105, 87, 243, 0.12);
+        color: var(--sidebar-accent);
+        font-size: 0.95rem;
+        font-weight: 700;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      .season-items {
+        list-style: none;
+        margin: 0;
+        padding: 0 0 1rem;
+      }
+
+      .season-link {
+        display: block;
+        padding: 0.55rem 1.25rem 0.55rem 1.5rem;
+        color: var(--sidebar-text);
+        font-size: 0.92rem;
+        line-height: 1.45;
+        text-decoration: none;
+      }
+
+      .season-link.is-current,
+      .season-link:hover {
+        background: var(--sidebar-hover);
+      }
+
+      .season-link.is-current {
+        font-weight: 700;
       }
 
       .seminar-detail {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 7rem 2rem 4rem;
+        max-width: 1100px;
+        padding: 4rem 3rem;
       }
 
       .seminar-detail-header {
@@ -92,8 +186,17 @@
       }
 
       @media (max-width: 768px) {
+        .seminar-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .seminar-sidebar {
+          border-right: 0;
+          border-bottom: 1px solid var(--sidebar-border);
+        }
+
         .seminar-detail {
-          padding-top: 6.5rem;
+          padding: 3rem 1.5rem;
         }
 
         .seminar-detail-header h1 {
@@ -129,39 +232,65 @@
       </div>
     </nav>
 
-    <main class="seminar-detail">
-      <a class="back-link" href="index.html">← Back to seminars</a>
-
-      <header class="seminar-detail-header">
-        <p>2025 Fall / Seminar 01</p>
-        <h1>1+1=0</h1>
-        <div class="seminar-meta">
-          <strong>Speaker:</strong> Ye-sung Kook (Sungkyunkwan University)
+    <main class="seminar-layout">
+      <aside class="seminar-sidebar">
+        <div class="seminar-sidebar-header">
+          <h1>SEMINARS</h1>
         </div>
-      </header>
 
-      <section class="seminar-summary">
-        <h2>초록</h2>
-        <p>
-          우리는 보통 1+1=2를 절대적인 사실처럼 받아들이지만, 어떤 연산을 어떻게
-          정의하느냐에 따라 전혀 다른 결과가 나올 수 있습니다. 이 세미나는 덧셈의
-          정의를 다시 바라보면서, 수학이 단순한 계산을 넘어 개념을 설계하는 학문임을
-          직관적으로 보여주는 입문 세션입니다.
-        </p>
-        <p>
-          연산의 규칙이 달라질 때 어떤 구조가 만들어지는지, 그리고 이런 발상이 현대
-          수학과 컴퓨터 과학에서 왜 중요한지 간단한 예시와 함께 소개합니다.
-        </p>
-      </section>
+        <section class="season">
+          <button class="season-toggle" type="button" aria-expanded="true">
+            <span>2025 Fall</span>
+            <span class="season-icon" aria-hidden="true">⌃</span>
+          </button>
+          <ul class="season-items">
+            <li><a class="season-link is-current" href="one-plus-one-equals-zero.html">1+1=0</a></li>
+            <li><span class="season-link">Course Registration and Game Theory</span></li>
+            <li><span class="season-link">Tessellation of H²</span></li>
+            <li><span class="season-link">Randomness and Infinity</span></li>
+            <li><span class="season-link">Dual Number and Split-Complex Number</span></li>
+            <li><span class="season-link">Basic Convex Optimization II - Second-Order Methods</span></li>
+            <li><span class="season-link">Peter-Weyl Theorem</span></li>
+            <li><span class="season-link">Root System of Semisimple Lie Algebra and its Classification</span></li>
+            <li><span class="season-link">Antipodes and Involutions</span></li>
+          </ul>
+        </section>
+      </aside>
 
-      <section class="seminar-video">
-        <h2>Video Link</h2>
-        <p>영상 링크가 준비되면 이 위치에 추가할 수 있습니다.</p>
-        <img
-          class="seminar-image"
-          src="../assets/project/project-one.png"
-          alt="1+1=0 seminar thumbnail"
-        />
+      <section class="seminar-detail">
+        <a class="back-link" href="index.html">← Back to seminars</a>
+
+        <header class="seminar-detail-header">
+          <p>2025 Fall / Seminar 01</p>
+          <h1>1+1=0</h1>
+          <div class="seminar-meta">
+            <strong>Speaker:</strong> Ye-sung Kook (Sungkyunkwan University)
+          </div>
+        </header>
+
+        <section class="seminar-summary">
+          <h2>초록</h2>
+          <p>
+            우리는 보통 1+1=2를 절대적인 사실처럼 받아들이지만, 어떤 연산을 어떻게
+            정의하느냐에 따라 전혀 다른 결과가 나올 수 있습니다. 이 세미나는 덧셈의
+            정의를 다시 바라보면서, 수학이 단순한 계산을 넘어 개념을 설계하는 학문임을
+            직관적으로 보여주는 입문 세션입니다.
+          </p>
+          <p>
+            연산의 규칙이 달라질 때 어떤 구조가 만들어지는지, 그리고 이런 발상이 현대
+            수학과 컴퓨터 과학에서 왜 중요한지 간단한 예시와 함께 소개합니다.
+          </p>
+        </section>
+
+        <section class="seminar-video">
+          <h2>Video Link</h2>
+          <p>영상 링크가 준비되면 이 위치에 추가할 수 있습니다.</p>
+          <img
+            class="seminar-image"
+            src="../assets/project/project-one.png"
+            alt="1+1=0 seminar thumbnail"
+          />
+        </section>
       </section>
     </main>
     <script src="../js/script.js"></script>
