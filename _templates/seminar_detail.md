@@ -1,6 +1,6 @@
 ---
 layout: seminar_detail
-page_title: "SEMINAR TITLE | SKKU MATH MIMIC"
+page_title: "MIMIC | SEMINAR TITLE"
 seminar_title: "SEMINAR TITLE"
 semester_label: "2025 Fall"
 seminar_number: "02"
