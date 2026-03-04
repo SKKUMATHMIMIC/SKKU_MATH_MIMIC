@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seminars | SKKU MATH MIMIC</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../assets/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/favicon/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../assets/favicon/favicon-32x32.png"
+    />
+    <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/utilities.css" />
+    <style>
+      :root {
+        --sidebar-border: #dbd9e2;
+        --sidebar-text: #56525f;
+        --sidebar-accent: #6957f3;
+        --sidebar-hover: #f3f2f8;
+      }
+
+      body {
+        min-height: 100vh;
+      }
+
+      .seminar-browser {
+        display: grid;
+        grid-template-columns: minmax(320px, 430px) 1fr;
+        min-height: 100vh;
+      }
+
+      .seminar-sidebar {
+        border-right: 1px solid var(--sidebar-border);
+        background: #fbfbfd;
+      }
+
+      .seminar-sidebar-header {
+        padding: 2rem 2rem 1rem;
+        border-bottom: 1px solid var(--sidebar-border);
+      }
+
+      .seminar-sidebar-header h1 {
+        font-size: 2.2rem;
+        letter-spacing: 0.04em;
+      }
+
+      .season-list {
+        padding: 0;
+        margin: 0;
+      }
+
+      .season {
+        border-bottom: 1px solid var(--sidebar-border);
+      }
+
+      .season-toggle {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.25rem 1.5rem 1.25rem 2rem;
+        border: 0;
+        background: transparent;
+        font: inherit;
+        color: var(--sidebar-accent);
+        cursor: pointer;
+      }
+
+      .season-toggle span:first-child {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      .season-icon {
+        width: 3.8rem;
+        height: 3.8rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #7c7882;
+        border-radius: 0.35rem;
+        color: var(--sidebar-accent);
+        font-size: 1.8rem;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      .season-items {
+        list-style: none;
+        margin: 0;
+        padding: 0 0 1rem;
+      }
+
+      .season-item {
+        display: block;
+        margin: 0;
+      }
+
+      .season-link {
+        display: block;
+        padding: 0.7rem 2rem 0.7rem 3rem;
+        color: var(--sidebar-text);
+        font-size: 1.1rem;
+        line-height: 1.45;
+        text-decoration: none;
+      }
+
+      .season-link.is-current,
+      .season-link:hover {
+        background: var(--sidebar-hover);
+      }
+
+      .season-link.is-current {
+        font-weight: 700;
+      }
+
+      .seminar-content {
+        padding: 6rem 4rem 3rem;
+      }
+
+      .seminar-content p {
+        max-width: 48rem;
+        font-size: 1.1rem;
+        color: #56525f;
+      }
+
+      .seminar-content h2 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .content-eyebrow {
+        display: inline-block;
+        margin-bottom: 1rem;
+        color: var(--sidebar-accent);
+        font-weight: 700;
+      }
+
+      .back-home {
+        display: inline-block;
+        margin-top: 2rem;
+        font-weight: 700;
+      }
+
+      @media (max-width: 900px) {
+        .seminar-browser {
+          grid-template-columns: 1fr;
+        }
+
+        .seminar-sidebar {
+          border-right: 0;
+          border-bottom: 1px solid var(--sidebar-border);
+        }
+
+        .seminar-content {
+          padding: 3rem 2rem;
+        }
+
+        .season-toggle {
+          padding-left: 1.25rem;
+        }
+
+        .season-link {
+          padding-left: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="seminar-browser">
+      <aside class="seminar-sidebar">
+        <div class="seminar-sidebar-header">
+          <h1>SEMINARS</h1>
+        </div>
+
+        <div class="season-list">
+          <section class="season" data-expanded="true">
+            <button class="season-toggle" type="button" aria-expanded="true">
+              <span>2025 Fall</span>
+              <span class="season-icon" aria-hidden="true">⌃</span>
+            </button>
+            <ul class="season-items">
+              <li class="season-item">
+                <a class="season-link is-current" href="one-plus-one-equals-zero.html">1+1=0</a>
+              </li>
+              <li class="season-item">
+                <span class="season-link">Course Registration and Game Theory</span>
+              </li>
+              <li class="season-item">
+                <span class="season-link">Tessellation of H²</span>
+              </li>
+              <li class="season-item">
+                <span class="season-link">Randomness and Infinity</span>
+              </li>
+              <li class="season-item">
+                <span class="season-link">Dual Number and Split-Complex Number</span>
+              </li>
+              <li class="season-item">
+                <span class="season-link">Basic Convex Optimization II - Second-Order Methods</span>
+              </li>
+              <li class="season-item">
+                <span class="season-link">Peter-Weyl Theorem</span>
+              </li>
+              <li class="season-item">
+                <span class="season-link">Root System of Semisimple Lie Algebra and its Classification</span>
+              </li>
+              <li class="season-item">
+                <span class="season-link">Antipodes and Involutions</span>
+              </li>
+            </ul>
+          </section>
+
+          <section class="season" data-expanded="false">
+            <button class="season-toggle" type="button" aria-expanded="false">
+              <span>2025 Spring</span>
+              <span class="season-icon" aria-hidden="true">⌄</span>
+            </button>
+            <ul class="season-items">
+              <li class="season-item"><span class="season-link">Coming soon</span></li>
+            </ul>
+          </section>
+
+          <section class="season" data-expanded="false">
+            <button class="season-toggle" type="button" aria-expanded="false">
+              <span>2024 Fall</span>
+              <span class="season-icon" aria-hidden="true">⌄</span>
+            </button>
+            <ul class="season-items">
+              <li class="season-item"><span class="season-link">Coming soon</span></li>
+            </ul>
+          </section>
+
+          <section class="season" data-expanded="false">
+            <button class="season-toggle" type="button" aria-expanded="false">
+              <span>2024 Spring</span>
+              <span class="season-icon" aria-hidden="true">⌄</span>
+            </button>
+            <ul class="season-items">
+              <li class="season-item"><span class="season-link">Coming soon</span></li>
+            </ul>
+          </section>
+
+          <section class="season" data-expanded="false">
+            <button class="season-toggle" type="button" aria-expanded="false">
+              <span>2023 Fall</span>
+              <span class="season-icon" aria-hidden="true">⌄</span>
+            </button>
+            <ul class="season-items">
+              <li class="season-item"><span class="season-link">Coming soon</span></li>
+            </ul>
+          </section>
+
+          <section class="season" data-expanded="false">
+            <button class="season-toggle" type="button" aria-expanded="false">
+              <span>2023 Spring</span>
+              <span class="season-icon" aria-hidden="true">⌄</span>
+            </button>
+            <ul class="season-items">
+              <li class="season-item"><span class="season-link">Coming soon</span></li>
+            </ul>
+          </section>
+
+          <section class="season" data-expanded="false">
+            <button class="season-toggle" type="button" aria-expanded="false">
+              <span>2022 Fall</span>
+              <span class="season-icon" aria-hidden="true">⌄</span>
+            </button>
+            <ul class="season-items">
+              <li class="season-item"><span class="season-link">Coming soon</span></li>
+            </ul>
+          </section>
+
+          <section class="season" data-expanded="false">
+            <button class="season-toggle" type="button" aria-expanded="false">
+              <span>2022 Spring</span>
+              <span class="season-icon" aria-hidden="true">⌄</span>
+            </button>
+            <ul class="season-items">
+              <li class="season-item"><span class="season-link">Coming soon</span></li>
+            </ul>
+          </section>
+        </div>
+      </aside>
+
+      <section class="seminar-content">
+        <span class="content-eyebrow">Seminar Archive</span>
+        <h2>Browse by semester</h2>
+        <p>
+          왼쪽 목록에서 학기를 펼치면 해당 세미나 제목들이 나타나도록 구성했습니다.
+          현재는 2025 Fall만 예시 데이터를 넣었고, 첫 번째 항목인
+          <strong>1+1=0</strong>은 기존 상세 페이지로 연결됩니다.
+        </p>
+        <p>
+          이후에는 각 제목을 개별 세미나 페이지로 연결하거나, 이 화면 오른쪽 영역에
+          요약 내용을 바로 보여주도록 확장할 수 있습니다.
+        </p>
+        <a class="back-home" href="../index.html#seminars">Back to home</a>
+      </section>
+    </main>
+
+    <script>
+      const seasons = document.querySelectorAll(".season");
+
+      seasons.forEach((season) => {
+        const toggle = season.querySelector(".season-toggle");
+        const items = season.querySelector(".season-items");
+        const icon = season.querySelector(".season-icon");
+
+        toggle.addEventListener("click", () => {
+          const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+
+          if (isExpanded) {
+            toggle.setAttribute("aria-expanded", "false");
+            items.style.display = "none";
+            icon.textContent = "⌄";
+            season.setAttribute("data-expanded", "false");
+            return;
+          }
+
+          toggle.setAttribute("aria-expanded", "true");
+          items.style.display = "block";
+          icon.textContent = "⌃";
+          season.setAttribute("data-expanded", "true");
+        });
+
+        if (toggle.getAttribute("aria-expanded") === "false") {
+          items.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
