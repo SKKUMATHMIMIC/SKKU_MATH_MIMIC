@@ -18,10 +18,24 @@
 body.seminar-page {
   min-height: 100vh;
   background: var(--page-bg);
+  font-family: "Raleway", sans-serif;
 }
 
 .seminar-page .navbar .nav-link.is-active {
   color: var(--sidebar-accent);
+}
+
+.seminar-page .seminar-sidebar,
+.seminar-page .seminar-shell,
+.seminar-page .seminar-content,
+.seminar-page .seminar-detail,
+.seminar-page .season-toggle,
+.seminar-page .season-link,
+.seminar-page .seminar-summary,
+.seminar-page .seminar-video,
+.seminar-page .seminar-meta,
+.seminar-page .back-link {
+  font-family: "Raleway", sans-serif;
 }
 
 [data-theme="dark"] {
@@ -60,6 +74,7 @@ body.seminar-page {
 
 .seminar-sidebar-header h1 {
   font-size: 1.05rem;
+  font-weight: 800;
   letter-spacing: 0.04em;
 }
 
@@ -88,7 +103,7 @@ body.seminar-page {
 
 .season-toggle span:first-child {
   font-size: 0.92rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .season-icon {
@@ -137,6 +152,7 @@ body.seminar-page {
   padding: 0.55rem 1.25rem 0.55rem 1.5rem;
   color: var(--sidebar-text);
   font-size: 0.92rem;
+  font-weight: 600;
   line-height: 1.45;
   text-decoration: none;
 }
