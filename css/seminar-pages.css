@@ -4,6 +4,15 @@
   --sidebar-accent: #1c6b42;
   --sidebar-hover: #eef6f0;
   --page-bg: #fbfbfd;
+  --panel-bg: #fbfbfd;
+  --content-muted: #56525f;
+  --content-subtle: #666666;
+  --season-icon-border: #c8c3d7;
+  --season-icon-bg-start: #ffffff;
+  --season-icon-bg-end: #eef6f0;
+  --season-icon-shadow: rgba(28, 107, 66, 0.12);
+  --season-icon-shadow-strong: rgba(28, 107, 66, 0.18);
+  --season-icon-border-hover: #6da985;
 }
 
 body.seminar-page {
@@ -15,6 +24,23 @@ body.seminar-page {
   color: var(--sidebar-accent);
 }
 
+[data-theme="dark"] {
+  --sidebar-border: #243129;
+  --sidebar-text: #c5d0c9;
+  --sidebar-accent: #69b384;
+  --sidebar-hover: #162019;
+  --page-bg: #0c0f0d;
+  --panel-bg: #101513;
+  --content-muted: #c5d0c9;
+  --content-subtle: #8fa095;
+  --season-icon-border: #34503f;
+  --season-icon-bg-start: #111714;
+  --season-icon-bg-end: #17211b;
+  --season-icon-shadow: rgba(0, 0, 0, 0.28);
+  --season-icon-shadow-strong: rgba(0, 0, 0, 0.38);
+  --season-icon-border-hover: #69b384;
+}
+
 .seminar-shell {
   display: grid;
   grid-template-columns: minmax(220px, 310px) 1fr;
@@ -24,7 +50,7 @@ body.seminar-page {
 
 .seminar-sidebar {
   border-right: 1px solid var(--sidebar-border);
-  background: #fbfbfd;
+  background: var(--panel-bg);
 }
 
 .seminar-sidebar-header {
@@ -71,10 +97,10 @@ body.seminar-page {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #c8c3d7;
+  border: 1px solid var(--season-icon-border);
   border-radius: 999px;
-  background: linear-gradient(180deg, #ffffff 0%, #eef6f0 100%);
-  box-shadow: 0 8px 20px rgba(28, 107, 66, 0.12);
+  background: linear-gradient(180deg, var(--season-icon-bg-start) 0%, var(--season-icon-bg-end) 100%);
+  box-shadow: 0 8px 20px var(--season-icon-shadow);
   color: var(--sidebar-accent);
   font-size: 0.95rem;
   font-weight: 700;
@@ -85,8 +111,8 @@ body.seminar-page {
 
 .season-toggle:hover .season-icon {
   transform: translateY(-1px);
-  border-color: #6da985;
-  box-shadow: 0 12px 24px rgba(28, 107, 66, 0.18);
+  border-color: var(--season-icon-border-hover);
+  box-shadow: 0 12px 24px var(--season-icon-shadow-strong);
 }
 
 .season-items {

@@ -38,6 +38,11 @@ h2::selection {
   color: var(--bg-primary);
 }
 
+.btn-secondary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
 /* add hover to resume button */
 .btn-primary:hover {
   background: var(--secondary-color);
@@ -101,6 +106,15 @@ h2::selection {
   padding: 0.5rem;
   margin: 0 auto;
   max-width: 700px;
+}
+
+[data-theme="dark"] .content-text p {
+  color: #c5d0c9;
+}
+
+[data-theme="dark"] .content-text h2,
+[data-theme="dark"] .header-container h1 {
+  color: #f2f6f3;
 }
 
 /* Project cards */

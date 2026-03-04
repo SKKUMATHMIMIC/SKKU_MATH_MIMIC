@@ -21,8 +21,36 @@
         margin-bottom: 2.5rem;
       }
 
+      .seminar-language-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        padding: 0.3rem;
+        border: 1px solid var(--sidebar-border);
+        border-radius: 999px;
+        background: var(--panel-bg);
+      }
+
+      .language-button {
+        border: 0;
+        background: transparent;
+        color: var(--content-muted);
+        font: inherit;
+        font-weight: 700;
+        padding: 0.45rem 0.95rem;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+
+      .language-button.is-active {
+        background: var(--sidebar-accent);
+        color: var(--bg-primary);
+      }
+
       .seminar-detail-header p {
-        color: #666;
+        color: var(--content-subtle);
         font-weight: 600;
         margin-bottom: 0.75rem;
       }
@@ -49,9 +77,24 @@
         margin-bottom: 1rem;
       }
 
+      .abstract-tagline {
+        margin-bottom: 1.25rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        text-align: center;
+        color: var(--text-color);
+      }
+
       .seminar-summary p,
       .seminar-video p {
         font-size: 1.05rem;
+        color: var(--content-muted);
+      }
+
+      .seminar-prerequisite {
+        margin-top: 1.5rem;
+        font-size: 1rem;
+        color: var(--content-muted);
       }
 
       .seminar-image {
@@ -66,6 +109,10 @@
         display: inline-block;
         margin-bottom: 2rem;
         font-weight: 700;
+      }
+
+      .seminar-lang-panel[hidden] {
+        display: none;
       }
 
       @media (max-width: 768px) {
@@ -91,20 +138,98 @@
     <main class="seminar-shell seminar-layout">
       <section class="seminar-detail">
         <a class="back-link" href="{{ '/seminars/index.html' | relative_url }}">← Back to seminars</a>
+        {% assign has_english = false %}
+        {% if page.abstract_body_en or page.seminar_title_en or page.speaker_en %}
+          {% assign has_english = true %}
+        {% endif %}
 
-        <header class="seminar-detail-header">
-          <p>{{ page.semester_label }} / Seminar {{ page.seminar_number }}</p>
-          <h1>{{ page.seminar_title }}</h1>
-          <div class="seminar-meta">
-            <strong>Speaker:</strong> {{ page.speaker }}
-          </div>
-        </header>
+        {% if has_english %}
+        <div class="seminar-language-toggle" data-language-toggle>
+          <button
+            class="language-button is-active"
+            type="button"
+            data-language-button="ko"
+            aria-pressed="true"
+          >한국어</button>
+          <button
+            class="language-button"
+            type="button"
+            data-language-button="en"
+            aria-pressed="false"
+          >EN</button>
+        </div>
+        {% endif %}
 
-        {{ content }}
+        <div class="seminar-lang-panel" data-language-panel="ko">
+          <header class="seminar-detail-header">
+            <p>{{ page.semester_label }} / Seminar {{ page.seminar_number }}</p>
+            <h1>{{ page.seminar_title }}</h1>
+            <div class="seminar-meta">
+              <strong>Speaker:</strong> {{ page.speaker }}
+            </div>
+          </header>
+
+          <section class="seminar-summary">
+            <h2>초록</h2>
+            {% if page.abstract_tagline %}
+            <p class="abstract-tagline">{{ page.abstract_tagline }}</p>
+            {% endif %}
+            {{ content }}
+            {% if page.prerequisite %}
+            <p class="seminar-prerequisite"><strong>사전지식:</strong> {{ page.prerequisite }}</p>
+            {% endif %}
+          </section>
+
+          <section class="seminar-video">
+            <h2>{{ page.video_heading | default: 'Video Link' }}</h2>
+            <p>{{ page.video_note | default: '영상 링크가 준비되면 이 위치에 추가할 수 있습니다.' }}</p>
+            <img
+              class="seminar-image"
+              src="{{ page.thumbnail_src | default: '/assets/project/project-one.png' | relative_url }}"
+              alt="{{ page.thumbnail_alt | default: page.seminar_title }}"
+            />
+          </section>
+        </div>
+
+        {% if has_english %}
+        <div class="seminar-lang-panel" data-language-panel="en" hidden>
+          <header class="seminar-detail-header">
+            <p>{{ page.semester_label_en | default: page.semester_label }} / Seminar {{ page.seminar_number }}</p>
+            <h1>{{ page.seminar_title_en | default: page.seminar_title }}</h1>
+            <div class="seminar-meta">
+              <strong>Speaker:</strong> {{ page.speaker_en | default: page.speaker }}
+            </div>
+          </header>
+
+          <section class="seminar-summary">
+            <h2>{{ page.abstract_heading_en | default: 'Abstract' }}</h2>
+            {% if page.abstract_tagline_en %}
+            <p class="abstract-tagline">{{ page.abstract_tagline_en }}</p>
+            {% endif %}
+            {{ page.abstract_body_en | markdownify }}
+            {% if page.prerequisite_en %}
+            <p class="seminar-prerequisite"><strong>{{ page.prerequisite_label_en | default: 'Prerequisite' }}:</strong> {{ page.prerequisite_en }}</p>
+            {% endif %}
+          </section>
+
+          <section class="seminar-video">
+            <h2>{{ page.video_heading_en | default: page.video_heading | default: 'Video Link' }}</h2>
+            <p>{{ page.video_note_en | default: page.video_note | default: 'Video link will be added here when available.' }}</p>
+            <img
+              class="seminar-image"
+              src="{{ page.thumbnail_src | default: '/assets/project/project-one.png' | relative_url }}"
+              alt="{{ page.thumbnail_alt_en | default: page.thumbnail_alt | default: page.seminar_title_en | default: page.seminar_title }}"
+            />
+          </section>
+        </div>
+        {% endif %}
       </section>
 
       {% include seminar-sidebar.html current_path=page.current_path %}
     </main>
+    {% if has_english %}
+    <script src="{{ '/js/seminar-language-toggle.js' | relative_url }}"></script>
+    {% endif %}
     <script src="{{ '/js/seminar-sidebar.js' | relative_url }}"></script>
     <script src="{{ '/js/script.js' | relative_url }}"></script>
   </body>
