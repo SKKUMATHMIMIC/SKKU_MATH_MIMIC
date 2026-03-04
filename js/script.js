@@ -1,7 +1,9 @@
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
 
-hamburger.addEventListener("click", mobileMenu);
+if (hamburger && navMenu) {
+  hamburger.addEventListener("click", mobileMenu);
+}
 
 function mobileMenu() {
   hamburger.classList.toggle("active");
@@ -14,6 +16,10 @@ const navLink = document.querySelectorAll(".nav-link");
 navLink.forEach((n) => n.addEventListener("click", closeMenu));
 
 function closeMenu() {
+  if (!hamburger || !navMenu) {
+    return;
+  }
+
   hamburger.classList.remove("active");
   navMenu.classList.remove("active");
 }
@@ -31,7 +37,9 @@ function switchTheme(e) {
   }
 }
 
-toggleSwitch.addEventListener("change", switchTheme, false);
+if (toggleSwitch) {
+  toggleSwitch.addEventListener("change", switchTheme, false);
+}
 
 //  Store color theme for future visits
 
@@ -54,7 +62,7 @@ const currentTheme = localStorage.getItem("theme")
 if (currentTheme) {
   document.documentElement.setAttribute("data-theme", currentTheme);
 
-  if (currentTheme === "dark") {
+  if (currentTheme === "dark" && toggleSwitch) {
     toggleSwitch.checked = true;
   }
 }
@@ -64,4 +72,6 @@ if (currentTheme) {
 let myDate = document.querySelector("#datee");
 
 const yes = new Date().getFullYear();
-myDate.innerHTML = yes;
+if (myDate) {
+  myDate.innerHTML = yes;
+}
