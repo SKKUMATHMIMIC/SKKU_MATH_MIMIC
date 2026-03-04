@@ -103,6 +103,10 @@ body {
   font-weight: var(--weight-semibold);
 }
 
+.navbar .nav-link.is-active {
+  color: #1c6b42;
+}
+
 .navbar #logo img {
   display: block;
   width: 40px;
