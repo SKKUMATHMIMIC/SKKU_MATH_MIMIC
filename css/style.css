@@ -210,6 +210,46 @@ body {
   margin: 3.25rem auto 0;
 }
 
+#news {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto 5rem;
+  scroll-margin-top: 98px;
+}
+
+#news .content-text p {
+  max-width: 780px;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+#news .archive-link {
+  display: block;
+  width: max-content;
+  margin: 3.25rem auto 0;
+}
+
+.news-card {
+  display: block;
+  color: #ffffff;
+}
+
+.news-card:hover,
+.news-card:focus-visible {
+  color: #ffffff;
+}
+
+.news-card .project-bio h3 {
+  font-size: 1.03rem;
+  line-height: 1.35;
+}
+
+.news-card .project-bio p {
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
+  opacity: 0.92;
+}
+
 #contact {
   display: flex;
   flex-direction: column;

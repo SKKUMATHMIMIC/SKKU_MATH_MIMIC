@@ -1,0 +1,21 @@
+---
+layout: basic_page
+page_title: "NEWS | MIMIC"
+page_heading: "News Archive"
+nav_active: news
+---
+
+<p>
+  Recent community and project activities outside the main seminar and
+  conference programs.
+</p>
+
+<ul class="news-link-list">
+  {% for item in site.data.news.items %}
+  <li>
+    <a href="{{ item.href | relative_url }}">
+      {{ item.title }} <span style="font-weight: 500;">({{ item.date }})</span>
+    </a>
+  </li>
+  {% endfor %}
+</ul>

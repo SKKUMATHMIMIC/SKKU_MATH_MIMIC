@@ -99,6 +99,7 @@
           <!-- Navbar links -->
           <ul class="nav-menu">
             <li><a class="nav-link is-active" href="#hero">MAIN</a></li>
+            <li><a class="nav-link" href="#news">NEWS</a></li>
             <li><a class="nav-link" href="#seminars">SEMINARS</a></li>
             <li><a class="nav-link" href="#conferences">CONFERENCES</a></li>
             <li><a class="nav-link" href="#contact">CONTACT</a></li>
@@ -187,6 +188,38 @@
           </ul>
         </article>
       </div>
+    </section>
+
+    <section id="news" class="project-container container">
+      <div class="division"></div>
+      <div class="content-text">
+        <h2>News</h2>
+        <p>
+          Recent events beyond our main seminar and conference programs.
+        </p>
+      </div>
+
+      {% assign latest_news = site.data.news.items | default: empty %}
+      <article class="project news-project">
+        {% for item in latest_news limit: 3 %}
+        <a
+          class="card news-card"
+          href="{{ item.href | relative_url }}"
+          style="background-image: url('{{ item.thumbnail | relative_url }}'); background-position: center; background-size: cover;"
+        >
+          <div class="project-info">
+            <div class="project-bio">
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.date }}</p>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </article>
+
+      <a href="{{ '/news/index.html' | relative_url }}" class="btn btn-secondary archive-link"
+        >See All News <i class="fas fa-arrow-right"></i
+      ></a>
     </section>
 
     <!-- Projects -> now Seminars -->

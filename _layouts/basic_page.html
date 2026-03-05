@@ -28,6 +28,83 @@
         font-size: 1.1rem;
         color: var(--content-muted);
       }
+
+      .news-meta {
+        margin: 0 0 0.65rem;
+        font-size: 0.98rem;
+        color: var(--content-subtle);
+      }
+
+      .news-section {
+        margin-top: 1.4rem;
+      }
+
+      .news-section h2 {
+        font-size: 1.45rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .news-gallery {
+        margin-top: 1.2rem;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.7rem;
+      }
+
+      .news-gallery img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 12px;
+        border: 1px solid var(--sidebar-border);
+        background: var(--panel-bg);
+      }
+
+      .news-link-list {
+        margin: 1.4rem 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 0.7rem;
+      }
+
+      .news-link-list a {
+        display: block;
+        padding: 0.78rem 0.95rem;
+        border-radius: 12px;
+        border: 1px solid var(--sidebar-border);
+        background: var(--panel-bg);
+        font-weight: 700;
+      }
+
+      .news-link-list a:hover,
+      .news-link-list a:focus-visible {
+        border-color: var(--sidebar-accent);
+      }
+
+      @media (max-width: 900px) {
+        .news-gallery {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 600px) {
+        .page-content {
+          padding: 6.2rem 1rem 3rem;
+        }
+
+        .page-content h1 {
+          font-size: 2.2rem;
+        }
+
+        .news-gallery {
+          grid-template-columns: 1fr;
+        }
+
+        .news-gallery img {
+          height: 200px;
+        }
+      }
     </style>
   </head>
   <body class="basic-page">
