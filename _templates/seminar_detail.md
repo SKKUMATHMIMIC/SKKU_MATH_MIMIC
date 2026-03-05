@@ -7,22 +7,27 @@ permalink: /seminars/2025Fall/your-slug/
 seminar_title: "SEMINAR TITLE"
 semester_label: "2025 Fall"
 seminar_number: "02"
+speaker_label: "Speaker"
 speaker: "Speaker Name (Affiliation)"
 current_path: "2025Fall/your-slug/"
 
 # Korean content
+abstract_heading: "초록"
 abstract_tagline: "“한 줄 멘트”"
 abstract_body_ko: |
   세미나 초록 첫 번째 문단.
 
   세미나 초록 두 번째 문단.
+prerequisite_label: "사전지식"
 prerequisite: "없음"
 
 # English content
+abstract_heading_en: "Abstract"
 abstract_body_en: |
   English abstract first paragraph.
 
   English abstract second paragraph.
+speaker_label_en: "Speaker"
 prerequisite_en: "None"
 prerequisite_label_en: "Prerequisite"
 

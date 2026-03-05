@@ -287,12 +287,12 @@
             <p class="seminar-context">{{ page.semester_label }} / Seminar {{ page.seminar_number }}</p>
             <h1>{{ page.seminar_title }}</h1>
             <div class="seminar-meta">
-              <strong>Speaker:</strong> {{ page.speaker }}
+              <strong>{{ page.speaker_label | default: 'Speaker' }}:</strong> {{ page.speaker }}
             </div>
           </header>
 
           <section class="seminar-summary detail-card">
-            <h2>초록</h2>
+            <h2>{{ page.abstract_heading | default: '초록' }}</h2>
             {% if page.abstract_tagline %}
             <p class="abstract-tagline">{{ page.abstract_tagline }}</p>
             {% endif %}
@@ -302,7 +302,7 @@
             {{ content }}
             {% endif %}
             {% if page.prerequisite %}
-            <p class="seminar-prerequisite"><strong>사전지식:</strong> {{ page.prerequisite }}</p>
+            <p class="seminar-prerequisite"><strong>{{ page.prerequisite_label | default: '사전지식' }}:</strong> {{ page.prerequisite }}</p>
             {% endif %}
           </section>
 
@@ -350,12 +350,12 @@
             <p class="seminar-context">{{ page.semester_label }} / Seminar {{ page.seminar_number }}</p>
             <h1>{{ page.seminar_title }}</h1>
             <div class="seminar-meta">
-              <strong>Speaker:</strong> {{ page.speaker }}
+              <strong>{{ page.speaker_label_en | default: page.speaker_label | default: 'Speaker' }}:</strong> {{ page.speaker }}
             </div>
           </header>
 
           <section class="seminar-summary detail-card">
-            <h2>Abstract</h2>
+            <h2>{{ page.abstract_heading_en | default: 'Abstract' }}</h2>
             {% assign english_tagline = page.abstract_tagline_en | default: page.abstract_tagline %}
             {% if english_tagline %}
             <p class="abstract-tagline">{{ english_tagline }}</p>
