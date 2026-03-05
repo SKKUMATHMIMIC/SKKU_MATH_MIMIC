@@ -223,8 +223,8 @@
       @media (max-width: 768px) {
         .seminar-layout {
           grid-template-areas:
-            "sidebar"
-            "detail";
+            "detail"
+            "sidebar";
         }
 
         .seminar-detail {
@@ -242,6 +242,13 @@
         .seminar-detail-header h1 {
           font-size: 2.35rem;
         }
+
+        .seminar-summary p,
+        .seminar-video p,
+        .seminar-materials p {
+          font-size: 0.98rem;
+          line-height: 1.75;
+        }
       }
     </style>
   </head>
@@ -251,7 +258,7 @@
     <main class="seminar-shell seminar-layout">
       <section class="seminar-detail">
         {% assign has_english = false %}
-        {% if page.abstract_body_en or page.seminar_title_en or page.speaker_en %}
+        {% if page.abstract_body_en %}
           {% assign has_english = true %}
         {% endif %}
 
@@ -340,17 +347,18 @@
         {% if has_english %}
         <div class="seminar-lang-panel" data-language-panel="en" hidden>
           <header class="seminar-detail-header seminar-hero-card">
-            <p class="seminar-context">{{ page.semester_label_en | default: page.semester_label }} / Seminar {{ page.seminar_number }}</p>
-            <h1>{{ page.seminar_title_en | default: page.seminar_title }}</h1>
+            <p class="seminar-context">{{ page.semester_label }} / Seminar {{ page.seminar_number }}</p>
+            <h1>{{ page.seminar_title }}</h1>
             <div class="seminar-meta">
-              <strong>Speaker:</strong> {{ page.speaker_en | default: page.speaker }}
+              <strong>Speaker:</strong> {{ page.speaker }}
             </div>
           </header>
 
           <section class="seminar-summary detail-card">
-            <h2>{{ page.abstract_heading_en | default: 'Abstract' }}</h2>
-            {% if page.abstract_tagline_en %}
-            <p class="abstract-tagline">{{ page.abstract_tagline_en }}</p>
+            <h2>Abstract</h2>
+            {% assign english_tagline = page.abstract_tagline_en | default: page.abstract_tagline %}
+            {% if english_tagline %}
+            <p class="abstract-tagline">{{ english_tagline }}</p>
             {% endif %}
             {{ page.abstract_body_en | markdownify }}
             {% if page.prerequisite_en %}
@@ -368,19 +376,19 @@
               href="{{ english_video_url }}"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Open video for {{ page.seminar_title_en | default: page.seminar_title }}"
+              aria-label="Open video for {{ page.seminar_title }}"
             >
               <img
                 class="seminar-image"
                 src="{{ page.thumbnail_src | default: '/assets/project/project-one.png' | relative_url }}"
-                alt="{{ page.thumbnail_alt_en | default: page.thumbnail_alt | default: page.seminar_title_en | default: page.seminar_title }}"
+                alt="{{ page.thumbnail_alt_en | default: page.thumbnail_alt | default: page.seminar_title }}"
               />
             </a>
             {% else %}
             <img
               class="seminar-image"
               src="{{ page.thumbnail_src | default: '/assets/project/project-one.png' | relative_url }}"
-              alt="{{ page.thumbnail_alt_en | default: page.thumbnail_alt | default: page.seminar_title_en | default: page.seminar_title }}"
+              alt="{{ page.thumbnail_alt_en | default: page.thumbnail_alt | default: page.seminar_title }}"
             />
             {% endif %}
           </section>
@@ -408,7 +416,7 @@
         {% endif %}
       </section>
 
-      {% include seminar-sidebar.html current_path=page.current_path %}
+      {% include seminar-sidebar.html current_path=page.current_path mobile_collapsed=true %}
     </main>
     {% if has_english %}
     <script src="{{ '/js/seminar-language-toggle.js' | relative_url }}"></script>

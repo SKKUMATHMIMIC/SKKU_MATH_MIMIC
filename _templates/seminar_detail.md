@@ -19,11 +19,6 @@ abstract_body_ko: |
 prerequisite: "없음"
 
 # English content
-seminar_title_en: "ENGLISH SEMINAR TITLE"
-semester_label_en: "2025 Fall"
-speaker_en: "Speaker Name (Affiliation)"
-abstract_heading_en: "Abstract"
-abstract_tagline_en: "\"One-line tagline\""
 abstract_body_en: |
   English abstract first paragraph.
 

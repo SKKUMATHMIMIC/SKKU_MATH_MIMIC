@@ -5,9 +5,15 @@
     <style>
       .seminar-browser {
         grid-template-columns: minmax(220px, 310px) 1fr;
+        grid-template-areas: "sidebar content";
+      }
+
+      .seminar-browser .seminar-sidebar {
+        grid-area: sidebar;
       }
 
       .seminar-content {
+        grid-area: content;
         padding: 6rem 4rem 3rem;
       }
 
@@ -36,8 +42,24 @@
       }
 
       @media (max-width: 900px) {
+        .seminar-browser {
+          grid-template-areas:
+            "content"
+            "sidebar";
+        }
+
         .seminar-content {
-          padding: 3rem 2rem;
+          padding: 2.4rem 1.2rem 2rem;
+        }
+
+        .seminar-content h2 {
+          font-size: 2.15rem;
+          line-height: 1.2;
+        }
+
+        .seminar-content p {
+          font-size: 1rem;
+          line-height: 1.7;
         }
       }
     </style>
@@ -46,7 +68,7 @@
     {% include site-navbar.html active="seminars" %}
 
     <main class="seminar-shell seminar-browser">
-      {% include seminar-sidebar.html current_path='' %}
+      {% include seminar-sidebar.html current_path='' mobile_collapsed=true %}
 
       <section class="seminar-content">
         {{ content }}
