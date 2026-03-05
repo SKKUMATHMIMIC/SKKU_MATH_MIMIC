@@ -142,19 +142,12 @@
       }
 
       .seminar-summary h2::after {
-        content: "";
-        display: block;
-        width: 42px;
-        height: 2px;
-        margin-top: 0.42rem;
-        border-radius: 999px;
-        background: var(--sidebar-accent);
-        opacity: 0.55;
+        content: none;
       }
 
       .abstract-tagline {
         margin: 0.05rem 0 0.24rem;
-        font-size: clamp(1.6rem, 3.1vw, 2rem);
+        font-size: clamp(2.1rem, 3.1vw, 2rem);
         font-weight: 900;
         line-height: 1.22;
         letter-spacing: -0.02em;
@@ -218,24 +211,12 @@
       }
 
       .seminar-prerequisite {
-        --prereq-gap: 2.1rem;
-        position: relative;
-        margin-top: var(--prereq-gap);
-        padding-top: 1.05rem;
-        border-top: 0;
+        margin-top: 1.25rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--sidebar-border);
         font-size: 0.95rem;
         line-height: 1.6;
         color: var(--content-muted);
-      }
-
-      .seminar-prerequisite::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: calc(var(--prereq-gap) / -2);
-        height: 1px;
-        background: var(--sidebar-border);
       }
 
       .seminar-video {
