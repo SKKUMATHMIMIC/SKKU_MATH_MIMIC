@@ -211,7 +211,7 @@
       }
 
       .seminar-prerequisite {
-        --prerequisite-separator-gap: 3.2rem;
+        --prerequisite-separator-gap: 2.4rem;
         margin-top: 0;
         font-size: 0.95rem;
         line-height: 1.6;
@@ -366,6 +366,9 @@
             {% else %}
             {{ content }}
             {% endif %}
+            {% if page.prerequisite %}
+            <div class="seminar-prerequisite"><strong>{{ page.prerequisite_label | default: '사전지식' }}:</strong> {{ page.prerequisite }}</div>
+            {% endif %}
           </div>
 
           {% if has_english %}
@@ -376,11 +379,11 @@
             <p class="abstract-tagline">{{ english_tagline }}</p>
             {% endif %}
             {{ english_abstract | markdownify }}
+            {% assign english_prerequisite = page.prerequisite_en | default: page.prerequisite %}
+            {% if english_prerequisite %}
+            <div class="seminar-prerequisite"><strong>{{ page.prerequisite_label_en | default: 'Prerequisite' }}:</strong> {{ english_prerequisite }}</div>
+            {% endif %}
           </div>
-          {% endif %}
-
-          {% if page.prerequisite %}
-          <div class="seminar-prerequisite"><strong>{{ page.prerequisite_label | default: '사전지식' }}:</strong> {{ page.prerequisite }}</div>
           {% endif %}
         </section>
 
