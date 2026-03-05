@@ -127,6 +127,11 @@ h2::selection {
   cursor: pointer;
 }
 
+.conference-card {
+  display: block;
+  color: inherit;
+}
+
 .card a {
   color: #ffffff;
   transition: 0.25s ease-in-out;
