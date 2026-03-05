@@ -210,6 +210,96 @@ body {
   margin: 3.25rem auto 0;
 }
 
+#club-overview {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto 5rem;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.overview-card {
+  background: #f8faf8;
+  border: 1px solid #dce5de;
+  border-radius: 18px;
+  padding: 1.5rem 1.4rem;
+  min-height: 280px;
+}
+
+.overview-label {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  color: var(--accent-color);
+  margin-bottom: 0.85rem;
+}
+
+.overview-card h3 {
+  font-size: 1.45rem;
+  line-height: 1.2;
+  margin-bottom: 0.85rem;
+}
+
+.overview-card p {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: #4d5250;
+}
+
+.overview-list {
+  margin: 0.15rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.overview-list li {
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: #4d5250;
+}
+
+.overview-list li + li {
+  margin-top: 0.5rem;
+}
+
+.overview-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.overview-tags li {
+  padding: 0.34rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid #d1ddd3;
+  background: #eef5ef;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #305740;
+}
+
+[data-theme="dark"] .overview-card {
+  background: #101513;
+  border-color: #223028;
+}
+
+[data-theme="dark"] .overview-card p,
+[data-theme="dark"] .overview-list li {
+  color: #c5d0c9;
+}
+
+[data-theme="dark"] .overview-tags li {
+  border-color: #2c4738;
+  background: #162019;
+  color: #a5d3b8;
+}
+
 .project {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -286,6 +376,10 @@ body {
 /* Responsiveness */
 
 @media (max-width: 1000px) {
+  .overview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .project {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -358,6 +452,19 @@ body {
 }
 
 @media (max-width: 600px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .overview-card {
+    min-height: auto;
+    padding: 1.2rem 1.1rem;
+  }
+
+  .overview-card h3 {
+    font-size: 1.25rem;
+  }
+
   .project {
     display: grid;
     grid-template-columns: 1fr;
