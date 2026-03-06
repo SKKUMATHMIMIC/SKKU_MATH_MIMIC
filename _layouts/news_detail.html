@@ -13,13 +13,11 @@
       }
 
       .event-detail {
-        max-width: 1040px;
+        max-width: 980px;
         margin: 0 auto;
         margin-top: 80px;
         min-height: calc(100vh - 80px);
-        padding: 3rem 3rem 4rem;
-        display: grid;
-        gap: 1.15rem;
+        padding: 3rem 2.1rem 4.1rem;
       }
 
       .detail-toolbar {
@@ -28,7 +26,7 @@
         justify-content: space-between;
         gap: 1rem;
         flex-wrap: wrap;
-        margin-bottom: 0.35rem;
+        margin-bottom: 1.6rem;
       }
 
       .back-link {
@@ -70,37 +68,28 @@
         color: var(--bg-primary);
       }
 
-      .news-panel {
-        display: grid;
-        gap: 1.15rem;
-      }
-
       .news-panel[hidden] {
         display: none;
       }
 
-      .event-hero-card,
-      .detail-card {
-        background: var(--panel-bg);
-        border: 1px solid var(--sidebar-border);
-        border-radius: 20px;
-        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+      .event-header {
+        margin-bottom: 1.45rem;
       }
 
-      .event-hero-card {
-        padding: 2rem 2.25rem;
+      .event-title {
+        margin: 0 0 1rem;
+        font-size: clamp(2.2rem, 5.2vw, 3.2rem);
+        line-height: 1.04;
+        letter-spacing: -0.025em;
       }
 
-      .event-hero-card h1 {
-        font-size: 2.85rem;
-        line-height: 1.05;
-        letter-spacing: -0.02em;
-        margin: 0 0 0.95rem;
+      .event-summary {
+        margin-bottom: 2.15rem;
       }
 
       .news-meta {
         margin: 0;
-        font-size: 1.02rem;
+        font-size: 1.01rem;
         color: var(--content-subtle);
       }
 
@@ -108,35 +97,37 @@
         color: var(--sidebar-accent);
       }
 
-      .event-summary,
-      .event-photos {
-        padding: 1.65rem 1.9rem 1.75rem;
-      }
-
       .news-summary {
-        margin: 0;
-        max-width: 56rem;
+        max-width: 57rem;
         font-size: 1.04rem;
         line-height: 1.78;
         color: var(--content-muted);
       }
 
-      .news-summary + .news-summary {
-        margin-top: 0.85rem;
+      .news-summary > p {
+        margin: 0;
+      }
+
+      .news-summary > p + p {
+        margin-top: 0.88rem;
       }
 
       .event-photos h2 {
-        margin: 0 0 0.85rem;
+        margin: 0 0 0.95rem;
         font-size: 1.28rem;
         letter-spacing: 0.01em;
       }
 
       .event-photos p {
         margin: 0;
-        max-width: 55rem;
+        max-width: 57rem;
         font-size: 1.02rem;
         line-height: 1.72;
         color: var(--content-muted);
+      }
+
+      .event-photos p + p {
+        margin-top: 0.72rem;
       }
 
       .news-gallery {
@@ -169,18 +160,15 @@
 
       @media (max-width: 768px) {
         .event-detail {
-          padding: 2rem 0.7rem 2.6rem;
+          padding: 2rem 1rem 2.6rem;
         }
 
-        .event-hero-card,
-        .event-summary,
-        .event-photos {
-          padding-left: 1.05rem;
-          padding-right: 1.05rem;
-        }
-
-        .event-hero-card h1 {
+        .event-title {
           font-size: 2.2rem;
+        }
+
+        .detail-toolbar {
+          margin-bottom: 1.25rem;
         }
 
         .news-summary,
@@ -188,17 +176,20 @@
           font-size: 0.97rem;
           line-height: 1.72;
         }
+
+        .event-summary {
+          margin-bottom: 1.8rem;
+        }
       }
 
       @media (max-width: 600px) {
         .event-detail {
-          padding: 1.65rem 0.9rem 2.4rem;
-          gap: 0.95rem;
+          padding: 1.65rem 0.95rem 2.25rem;
         }
 
         .detail-toolbar {
           gap: 0.7rem;
-          margin-bottom: 0.2rem;
+          margin-bottom: 1.05rem;
         }
 
         .back-link {
@@ -216,8 +207,9 @@
           padding: 0.38rem 0.78rem;
         }
 
-        .event-hero-card h1 {
+        .event-title {
           font-size: 1.95rem;
+          margin-bottom: 0.78rem;
         }
 
         .news-summary {
@@ -239,7 +231,7 @@
     {% include site-navbar.html active=page.nav_active %}
 
     <main class="event-detail">
-      {% assign korean_summary = page.summary_ko | default: '' | strip %}
+      {% assign korean_summary = page.summary_body_ko | default: page.summary_ko | default: '' | strip %}
       {% assign has_korean = false %}
       {% if korean_summary != '' %}
         {% assign has_korean = true %}
@@ -259,21 +251,25 @@
 
       {% if has_korean %}
       <section class="news-panel" data-language-panel="ko">
-        <header class="event-hero-card">
-          <h1>{{ page.page_heading_ko | default: page.page_heading }}</h1>
+        <header class="event-header">
+          <h1 class="event-title">{{ page.page_heading_ko | default: page.page_heading }}</h1>
           <p class="news-meta"><strong>{{ page.date_label_ko | default: '일시' }}:</strong> {{ page.event_date_ko | default: page.event_date }}</p>
         </header>
 
-        <section class="event-summary detail-card">
-          <p class="news-summary">{{ page.summary_ko | default: page.summary }}</p>
+        {% assign summary_ko_fallback = page.summary_ko | default: page.summary %}
+        {% assign summary_ko_body = page.summary_body_ko | default: summary_ko_fallback %}
+        <section class="event-summary">
+          <div class="news-summary">
+            {{ summary_ko_body | markdownify }}
+          </div>
         </section>
 
-        <section class="event-photos detail-card">
+        <section class="event-photos">
           <h2>{{ page.photos_heading_ko | default: '활동 사진' }}</h2>
           {% assign ko_note = page.photos_note_ko | default: page.photos_note %}
           {% assign ko_note_stripped = ko_note | strip %}
           {% if ko_note_stripped != '' %}
-          <p>{{ ko_note }}</p>
+          {{ ko_note | markdownify }}
           {% endif %}
           {% if page.gallery %}
           <div class="news-gallery">
@@ -286,20 +282,24 @@
       </section>
 
       <section class="news-panel" data-language-panel="en" hidden>
-        <header class="event-hero-card">
-          <h1>{{ page.page_heading }}</h1>
+        <header class="event-header">
+          <h1 class="event-title">{{ page.page_heading }}</h1>
           <p class="news-meta"><strong>{{ page.date_label | default: 'Date' }}:</strong> {{ page.event_date }}</p>
         </header>
 
-        <section class="event-summary detail-card">
-          <p class="news-summary">{{ page.summary }}</p>
+        {% assign summary_en_body = page.summary_body | default: page.summary %}
+        <section class="event-summary">
+          <div class="news-summary">
+            {{ summary_en_body | markdownify }}
+          </div>
         </section>
 
-        <section class="event-photos detail-card">
+        <section class="event-photos">
           <h2>{{ page.photos_heading | default: 'Activity Photos' }}</h2>
-          {% assign note_stripped = page.photos_note | default: '' | strip %}
+          {% assign note_raw = page.photos_note | default: '' %}
+          {% assign note_stripped = note_raw | strip %}
           {% if note_stripped != '' %}
-          <p>{{ page.photos_note }}</p>
+          {{ note_raw | markdownify }}
           {% endif %}
           {% if page.gallery %}
           <div class="news-gallery">
@@ -312,20 +312,24 @@
       </section>
       {% else %}
       <section class="news-panel">
-        <header class="event-hero-card">
-          <h1>{{ page.page_heading }}</h1>
+        <header class="event-header">
+          <h1 class="event-title">{{ page.page_heading }}</h1>
           <p class="news-meta"><strong>{{ page.date_label | default: 'Date' }}:</strong> {{ page.event_date }}</p>
         </header>
 
-        <section class="event-summary detail-card">
-          <p class="news-summary">{{ page.summary }}</p>
+        {% assign summary_en_body = page.summary_body | default: page.summary %}
+        <section class="event-summary">
+          <div class="news-summary">
+            {{ summary_en_body | markdownify }}
+          </div>
         </section>
 
-        <section class="event-photos detail-card">
+        <section class="event-photos">
           <h2>{{ page.photos_heading | default: 'Activity Photos' }}</h2>
-          {% assign note_stripped = page.photos_note | default: '' | strip %}
+          {% assign note_raw = page.photos_note | default: '' %}
+          {% assign note_stripped = note_raw | strip %}
           {% if note_stripped != '' %}
-          <p>{{ page.photos_note }}</p>
+          {{ note_raw | markdownify }}
           {% endif %}
           {% if page.gallery %}
           <div class="news-gallery">

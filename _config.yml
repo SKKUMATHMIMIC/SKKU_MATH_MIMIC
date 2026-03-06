@@ -1,1 +1,11 @@
 theme: jekyll-theme-cayman
+
+defaults:
+  - scope:
+      path: "news"
+      type: "pages"
+    values:
+      layout: news_detail
+      nav_active: news
+      back_url: "/news/index.html"
+      back_label: "Back to News"
