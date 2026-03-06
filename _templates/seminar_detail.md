@@ -15,9 +15,8 @@ speaker_label: "Speaker"
 speaker: "Speaker Name (Affiliation)"
 permalink: /your-seminar-slug
 current_path: "/your-seminar-slug"
-# Also add this page to _data/seminars.yml:
-# - title: "SEMINAR TITLE"
-#   href: "/your-seminar-slug"
+# Sidebar links are auto-detected from seminar_detail pages.
+# Make sure semester_label matches one of the labels in _data/seminars.yml.
 
 # Korean abstract
 abstract_heading: "초록"

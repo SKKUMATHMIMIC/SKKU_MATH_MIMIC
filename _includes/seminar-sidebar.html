@@ -3,15 +3,45 @@
     <h1>SEMINARS</h1>
   </div>
   <div class="season-list">
+    {% assign seminar_pages_all = site.pages | where: "layout", "seminar_detail" %}
+    {% assign normalized_current_path = include.current_path | default: '' %}
+    {% if normalized_current_path != '' %}
+      {% assign current_path_head = normalized_current_path | slice: 0, 1 %}
+      {% if current_path_head != '/' %}
+        {% assign normalized_current_path = '/seminars/' | append: normalized_current_path %}
+      {% endif %}
+    {% endif %}
+
     {% for season in site.data.seminars.seasons %}
+      {% assign season_pages = seminar_pages_all | where: "semester_label", season.label | sort: "seminar_date" %}
       {% assign season_has_current = false %}
-      {% for item in season.items %}
-        {% if item.href and item.href == include.current_path %}
+      {% for seminar_page in season_pages %}
+        {% assign seminar_page_path = seminar_page.current_path | default: seminar_page.url %}
+        {% assign seminar_page_path_head = seminar_page_path | slice: 0, 1 %}
+        {% if seminar_page_path != '' and seminar_page_path_head != '/' %}
+          {% assign seminar_page_path = '/seminars/' | append: seminar_page_path %}
+        {% endif %}
+        {% if seminar_page_path == normalized_current_path %}
           {% assign season_has_current = true %}
         {% endif %}
       {% endfor %}
+      {% if season_has_current == false %}
+        {% for item in season.items %}
+          {% if item.href %}
+            {% assign item_url = item.href %}
+            {% assign item_href_head = item_url | slice: 0, 1 %}
+            {% if item_href_head != '/' %}
+              {% assign item_url = '/seminars/' | append: item_url %}
+            {% endif %}
+            {% if item_url == normalized_current_path %}
+              {% assign season_has_current = true %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
       {% assign default_open = false %}
-      {% if include.current_path == nil or include.current_path == '' %}
+      {% if normalized_current_path == nil or normalized_current_path == '' %}
         {% if forloop.first %}
           {% assign default_open = true %}
         {% endif %}
@@ -27,25 +57,66 @@
           <span class="season-icon" aria-hidden="true">⌃</span>
         </button>
         <ul class="season-items"{% unless is_expanded %} style="display: none;"{% endunless %}>
-          {% for item in season.items %}
+          {% assign rendered_count = 0 %}
+
+          {% for seminar_page in season_pages %}
+            {% assign seminar_page_path = seminar_page.current_path | default: seminar_page.url %}
+            {% assign seminar_page_path_head = seminar_page_path | slice: 0, 1 %}
+            {% if seminar_page_path != '' and seminar_page_path_head != '/' %}
+              {% assign seminar_page_path = '/seminars/' | append: seminar_page_path %}
+            {% endif %}
+            {% assign seminar_title = seminar_page.seminar_title | default: seminar_page.title | default: seminar_page.page_title %}
             <li class="season-item">
-              {% if item.href %}
-                {% assign item_url = '' %}
-                {% assign item_href_head = item.href | slice: 0, 1 %}
-                {% if item_href_head == '/' %}
-                  {% assign item_url = item.href %}
-                {% else %}
-                  {% assign item_url = '/seminars/' | append: item.href %}
-                {% endif %}
-                <a
-                  class="season-link{% if item.href == include.current_path %} is-current{% endif %}"
-                  href="{{ item_url | relative_url }}"
-                >{{ item.title }}</a>
-              {% else %}
-                <span class="season-link">{{ item.title }}</span>
-              {% endif %}
+              <a
+                class="season-link{% if seminar_page_path == normalized_current_path %} is-current{% endif %}"
+                href="{{ seminar_page_path | relative_url }}"
+              >{{ seminar_title }}</a>
             </li>
+            {% assign rendered_count = rendered_count | plus: 1 %}
           {% endfor %}
+
+          {% for item in season.items %}
+            {% if item.href and item.href != '' %}
+              {% assign item_url = item.href %}
+              {% assign item_href_head = item_url | slice: 0, 1 %}
+              {% if item_href_head != '/' %}
+                {% assign item_url = '/seminars/' | append: item_url %}
+              {% endif %}
+
+              {% assign matched_existing_page = false %}
+              {% for seminar_page in season_pages %}
+                {% assign seminar_page_path = seminar_page.current_path | default: seminar_page.url %}
+                {% assign seminar_page_path_head = seminar_page_path | slice: 0, 1 %}
+                {% if seminar_page_path != '' and seminar_page_path_head != '/' %}
+                  {% assign seminar_page_path = '/seminars/' | append: seminar_page_path %}
+                {% endif %}
+                {% if seminar_page_path == item_url or seminar_page.url == item_url %}
+                  {% assign matched_existing_page = true %}
+                {% endif %}
+              {% endfor %}
+
+              {% if matched_existing_page == false %}
+                <li class="season-item">
+                  <a
+                    class="season-link{% if item_url == normalized_current_path %} is-current{% endif %}"
+                    href="{{ item_url | relative_url }}"
+                  >{{ item.title }}</a>
+                </li>
+                {% assign rendered_count = rendered_count | plus: 1 %}
+              {% endif %}
+            {% elsif item.title and season_pages.size == 0 %}
+              <li class="season-item">
+                <span class="season-link">{{ item.title }}</span>
+              </li>
+              {% assign rendered_count = rendered_count | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+
+          {% if rendered_count == 0 %}
+            <li class="season-item">
+              <span class="season-link">Coming soon</span>
+            </li>
+          {% endif %}
         </ul>
       </section>
     {% endfor %}
