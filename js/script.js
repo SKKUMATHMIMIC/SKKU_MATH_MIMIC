@@ -11,9 +11,9 @@ function mobileMenu() {
 }
 
 // Close navbar when link is clicked
-const navLink = document.querySelectorAll(".nav-link");
+const navLinks = Array.from(document.querySelectorAll(".nav-link"));
 
-navLink.forEach((n) => n.addEventListener("click", closeMenu));
+navLinks.forEach((n) => n.addEventListener("click", closeMenu));
 
 function closeMenu() {
   if (!hamburger || !navMenu) {
@@ -22,6 +22,64 @@ function closeMenu() {
 
   hamburger.classList.remove("active");
   navMenu.classList.remove("active");
+}
+
+// Highlight active navbar link on scroll (main page sections)
+const scrollSpyItems = navLinks
+  .map((link) => {
+    const href = link.getAttribute("href");
+    if (!href || !href.startsWith("#")) {
+      return null;
+    }
+
+    const section = document.querySelector(href);
+    if (!section) {
+      return null;
+    }
+
+    return { link, section };
+  })
+  .filter(Boolean);
+
+if (scrollSpyItems.length > 0) {
+  const setActiveLink = (activeLink) => {
+    scrollSpyItems.forEach(({ link }) => {
+      link.classList.toggle("is-active", link === activeLink);
+    });
+  };
+
+  const updateActiveLinkByScroll = () => {
+    const navbar = document.querySelector(".navbar");
+    const navHeight = navbar ? navbar.offsetHeight : 0;
+    const probeLine = navHeight + window.innerHeight * 0.35;
+    let activeItem = scrollSpyItems[0];
+
+    scrollSpyItems.forEach((item) => {
+      const sectionTop = item.section.getBoundingClientRect().top;
+      if (sectionTop <= probeLine) {
+        activeItem = item;
+      }
+    });
+
+    setActiveLink(activeItem.link);
+  };
+
+  let ticking = false;
+  const requestActiveLinkUpdate = () => {
+    if (ticking) {
+      return;
+    }
+
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      updateActiveLinkByScroll();
+      ticking = false;
+    });
+  };
+
+  window.addEventListener("scroll", requestActiveLinkUpdate, { passive: true });
+  window.addEventListener("resize", requestActiveLinkUpdate);
+  requestActiveLinkUpdate();
 }
 
 // Event Listeners: Handling toggle event
