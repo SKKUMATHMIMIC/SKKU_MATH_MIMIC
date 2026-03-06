@@ -202,7 +202,13 @@
         {% assign featured_season = site.data.seminars.seasons | first %}
         {% assign featured_item = featured_season.items | first %}
         {% assign featured_href = featured_item.href | default: '' %}
-        {% assign featured_page_url = '/seminars/' | append: featured_href %}
+        {% assign featured_page_url = '' %}
+        {% assign featured_href_head = featured_href | slice: 0, 1 %}
+        {% if featured_href_head == '/' %}
+          {% assign featured_page_url = featured_href %}
+        {% else %}
+          {% assign featured_page_url = '/seminars/' | append: featured_href %}
+        {% endif %}
         {% assign featured_page = site.pages | where: "url", featured_page_url | first %}
         {% if featured_page == nil %}
           {% assign featured_page = site.pages | where: "current_path", featured_href | first %}
@@ -214,7 +220,7 @@
         <!-- Seminar 1 -->
         <a
           class="card seminar-card"
-          href="{% if featured_href != '' %}{{ '/seminars/' | append: featured_href | relative_url }}{% else %}{{ '/seminars/index.html' | relative_url }}{% endif %}"
+          href="{% if featured_href != '' %}{{ featured_page_url | relative_url }}{% else %}{{ '/seminars/index.html' | relative_url }}{% endif %}"
           style="background-image: url('{{ featured_thumbnail | relative_url }}'); background-position: center; background-size: cover;"
         >
           <div class="project-info">

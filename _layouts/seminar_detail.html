@@ -439,7 +439,10 @@
         {% endif %}
       </section>
 
-      {% assign sidebar_current_path = page.url | remove_first: '/seminars/' | remove_first: '/' %}
+      {% assign sidebar_current_path = page.current_path | default: '' %}
+      {% if sidebar_current_path == '' %}
+        {% assign sidebar_current_path = page.url | remove_first: '/seminars/' | remove_first: '/' %}
+      {% endif %}
       {% include seminar-sidebar.html current_path=sidebar_current_path %}
     </main>
     {% if has_english %}

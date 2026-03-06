@@ -30,7 +30,13 @@
           {% for item in season.items %}
             <li class="season-item">
               {% if item.href %}
-                {% assign item_url = '/seminars/' | append: item.href %}
+                {% assign item_url = '' %}
+                {% assign item_href_head = item.href | slice: 0, 1 %}
+                {% if item_href_head == '/' %}
+                  {% assign item_url = item.href %}
+                {% else %}
+                  {% assign item_url = '/seminars/' | append: item.href %}
+                {% endif %}
                 <a
                   class="season-link{% if item.href == include.current_path %} is-current{% endif %}"
                   href="{{ item_url | relative_url }}"
